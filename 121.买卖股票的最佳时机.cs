@@ -57,21 +57,36 @@ public class Solution
         //     currentDay++;
         // }
         // return maxProfit;
-        if (prices.Length < 2)
+        // if (prices.Length < 2)
+        // {
+        //     return 0;
+        // }
+
+        // int maxProfit = 0;
+        // int currentMin = prices[0];
+
+        // for (int i = 1; i < prices.Length; i++)
+        // {
+        //     maxProfit = maxProfit > prices[i] - currentMin ? maxProfit : prices[i] - currentMin;
+        //     currentMin = currentMin < prices[i] ? currentMin : prices[i];
+        // }
+
+        // return maxProfit;
+        int n = prices.Length;
+        if(n==0)
         {
             return 0;
         }
-
-        int maxProfit = 0;
-        int currentMin = prices[0];
-
-        for (int i = 1; i < prices.Length; i++)
+        int[,] dp = new int[n, 2];
+        dp[0, 0] = 0;
+        dp[0, 1] = -prices[0];
+        for (int i = 1; i < n; i++)
         {
-            maxProfit = maxProfit > prices[i] - currentMin ? maxProfit : prices[i] - currentMin;
-            currentMin = currentMin < prices[i] ? currentMin : prices[i];
+            dp[i, 0] = Math.Max(dp[i - 1, 0], dp[i - 1, 1] + prices[i]);
+            dp[i, 1] = Math.Max(dp[i - 1, 1], -prices[i]);
         }
 
-        return maxProfit;
+        return dp[n - 1, 0];
     }
 }
 // @lc code=end
