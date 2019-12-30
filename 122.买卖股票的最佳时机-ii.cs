@@ -51,18 +51,21 @@ public class Solution
     public int MaxProfit(int[] prices)
     {
         int n = prices.Length;
-        if (n == 0)
-            return 0;
+            if (n == 0)
+            {
+                return 0;
+            }
 
-        int dp_i_0 = 0, dp_i_1 = int.MinValue;
-        for (int i = 0; i < n; i++)
-        {
-            int temp = dp_i_0;
-            dp_i_0 = Math.Max(dp_i_0, dp_i_1 + prices[i]);
-            dp_i_1 = Math.Max(dp_i_1, temp - prices[i]);
-        }
+            var dp = new int[n,2];
+            dp[0, 0] = 0;
+            dp[0, 1] = -prices[0];
+            for (int i = 1; i < n; i++)
+            {
+                dp[i, 0] = Math.Max(dp[i - 1, 0], dp[i - 1, 1] + prices[i]);
+                dp[i, 1] = Math.Max(dp[i - 1, 1], dp[i - 1, 0] - prices[i]);
+            }
 
-        return dp_i_0;
+            return dp[n - 1, 0];
     }
 }
 // @lc code=end
