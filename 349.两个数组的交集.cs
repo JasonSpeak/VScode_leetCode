@@ -36,9 +36,32 @@
  */
 
 // @lc code=start
-public class Solution {
-    public int[] Intersection(int[] nums1, int[] nums2) {
+public class Solution
+{
+    public int[] Intersection(int[] nums1, int[] nums2)
+    {
+        var set1 = new HashSet<int>();
+        var set2 = new HashSet<int>();
+        foreach (var i in nums1)
+        {
+            set1.Add(i);
+        }
 
+        foreach (var i in nums2)
+        {
+            set2.Add(i);
+        }
+        set1.IntersectWith(set2);
+
+        int[] res = new int[set1.Count];
+        int index = 0;
+        foreach (var i in set1)
+        {
+            res[index] = i;
+            index++;
+        }
+
+        return res;
     }
 }
 // @lc code=end
