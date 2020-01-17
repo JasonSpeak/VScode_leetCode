@@ -37,9 +37,30 @@
  */
 
 // @lc code=start
-public class Solution {
-    public char FindTheDifference(string s, string t) {
+public class Solution
+{
+    public char FindTheDifference(string s, string t)
+    {
+        int[] flag = new int[26];
+        foreach (var c in s)
+        {
+            flag[c - 'a']++;
+        }
 
+        foreach (var c in t)
+        {
+            flag[c - 'a']--;
+        }
+
+        for (int i = 0; i < 26; i++)
+        {
+            if (flag[i] < 0)
+            {
+                return (char)('a' + i);
+            }
+        }
+
+        return 'a';
     }
 }
 // @lc code=end
