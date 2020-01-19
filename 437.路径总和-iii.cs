@@ -52,9 +52,35 @@
  *     public TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
-    public int PathSum(TreeNode root, int sum) {
+public class Solution
+{
+    public int PathSum(TreeNode root, int sum)
+    {
+        return GetPathSum(root, sum, new int[1000], 0);
+    }
 
+    private int GetPathSum(TreeNode root, int sum, int[] array, int p)
+    {
+        if (root == null)
+        {
+            return 0;
+        }
+
+        array[p] = root.val;
+        int tmp = 0;
+        int n = 0;
+        for (int i = p; i >= 0; i--)
+        {
+            tmp += array[i];
+            if (tmp == sum)
+            {
+                n++;
+            }
+        }
+
+        int left = GetPathSum(root.left, sum, array, p + 1);
+        int right = GetPathSum(root.right, sum, array, p + 1);
+        return n + left + right;
     }
 }
 // @lc code=end
