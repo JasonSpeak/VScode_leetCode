@@ -52,7 +52,7 @@ public class Solution
                 if (grid[i][j] == 1)
                 {
                     int lines = 4;
-                    //判断这个岛旁边连接了多少个岛
+                    //判断这个岛旁边连接了多少个岛,每个格子减一
                     if (i > 0 && grid[i - 1][j] == 1) lines--;
                     if (i < grid.Length - 1 && grid[i + 1][j] == 1) lines--;
                     if (j > 0 && grid[i][j - 1] == 1) lines--;
